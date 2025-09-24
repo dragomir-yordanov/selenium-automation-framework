@@ -1,21 +1,12 @@
-Python Selenium Automation Framework
-
-
-
-
-
-
-
-
 Описание
 
 Това е примерен automation testing framework на Python с Selenium WebDriver, Pytest, Page Object Model (POM) и CI/CD с GitHub Actions.
 
 Проектът демонстрира:
 
-Page Object Model за по-добра структура и поддръжка
+Page Object Model за подреден код
 
-Параметризирани тестове с pytest
+Параметризирани тестове с Pytest
 
 HTML репорти (pytest-html)
 
@@ -23,7 +14,9 @@ Headless Chrome за автоматично изпълнение в CI
 
 CI/CD workflow с GitHub Actions за автоматично пускане на тестовете
 
-📂 Структура на проекта
+Branch workflow за QA Automation team
+
+Структура на проекта
 automation_framework/
 │
 ├── pages/
@@ -41,7 +34,7 @@ automation_framework/
 ├── requirements.txt
 └── README.md
 
-⚡ Инсталация
+Инсталация
 
 Клонирай репото:
 
@@ -49,7 +42,7 @@ git clone https://github.com/<your-username>/<your-repo>.git
 cd automation_framework
 
 
-Създай virtual environment и активирай:
+Създай virtual environment и го активирай:
 
 python -m venv venv
 # Windows
@@ -62,25 +55,50 @@ source venv/bin/activate
 
 pip install -r requirements.txt
 
-🧪 Стартиране на тестовете локално
+Стартиране на тестовете локално
 pytest --html=report.html --self-contained-html
 
 
-Генерира се HTML репорт report.html.
+Генерира HTML репорт report.html.
 
-Chrome се стартира headless (без графичен интерфейс).
+Chrome се стартира headless (без GUI).
 
-📈 GitHub Actions (CI/CD)
+GitHub Actions (CI/CD)
 
 Всеки push или pull request към main пуска тестовете автоматично.
 
-Генерира HTML репорт, който се качва като artifact в GitHub Actions.
+Генерира HTML репорт и го качва като artifact.
 
 Headless Chrome се използва за стабилно изпълнение на CI.
 
-⚙️ Конфигурация
+Branch workflow за QA Automation
+Branch	Цел
+main	Стабилен branch с минали тестове.
+develop	Интеграционен branch, където се сливат feature branch-овете.
+feature/<name>	Нови функционалности или тестове.
+bugfix/<name>	Поправки на тестове или грешки.
 
-Всички основни настройки са в config.json:
+Примерен workflow:
+
+Създаваш feature branch:
+
+git checkout -b feature/login-tests
+
+
+Локално пускаш тестовете:
+
+pytest --html=report.html --self-contained-html
+
+
+Push на branch и създаване на Pull Request към develop.
+
+CI/CD workflow автоматично стартира тестовете → проверява статуса.
+
+Merge към develop → после към main когато всичко е стабилно.
+
+Конфигурация
+
+config.json съдържа:
 
 {
   "base_url": "https://www.saucedemo.com/",
@@ -88,7 +106,7 @@ Headless Chrome се използва за стабилно изпълнение
   "password": "secret_sauce"
 }
 
-📌 Технологии
+Технологии
 
 Python 3.11
 
@@ -96,7 +114,7 @@ Selenium WebDriver
 
 Pytest
 
-Pytest-html (HTML репорти)
+Pytest-html
 
 WebDriver Manager
 
